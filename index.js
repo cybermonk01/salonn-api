@@ -53,7 +53,7 @@ app.use((req, res, next) => {
   if (req.method === "OPTIONS") res.sendStatus(200);
   else next();
 });
-app.use(cors({ origin: "*", credentials: true }));
+// app.use(cors({ origin: "*", credentials: true }));
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || "Something went wrong!";
