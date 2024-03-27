@@ -91,6 +91,9 @@ async function verify(req, res, next) {
   }
 }
 
+app.get("/", (req, res, next) => {
+  res.send({ message: "Awesome🚀, We are Live!" });
+});
 app.get("/api/register", async (req, res, next) => {
   res.send({ message: "awesome New User is Registered" });
 });
