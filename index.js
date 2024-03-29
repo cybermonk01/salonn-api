@@ -33,27 +33,9 @@ connect();
 app.use(express.json());
 app.use(cookieParser());
 
-const whitelist = ["*"];
+app.use(cors());
 
-app.use((req, res, next) => {
-  const origin = req.get("referer");
-  const isWhitelisted = whitelist.find((w) => origin && origin.includes(w));
-  if (isWhitelisted) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "X-Requested-With,Content-Type,Authorization"
-    );
-    res.setHeader("Access-Control-Allow-Credentials", true);
-  }
-  if (req.method === "OPTIONS") res.sendStatus(200);
-  else next();
-});
-app.use(cors({ origin: "http://locahost:5174", credentials: true }));
+app.options("*", cors());
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || "Something went wrong!";
